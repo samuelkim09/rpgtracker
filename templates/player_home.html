@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fiche personnage</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .info-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+    .info-line {
+      margin: 8px 0;
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="info-block">
+    <h1>{{ p.name }}</h1>
+    <a href="/logout">Déconnexion</a>
+  </div>
+
+  <div class="info-block">
+    <h2>Infos</h2>
+    <div class="info-line">Race : {{ p.race }}</div>
+    <div class="info-line">Âge : {{ p.age }}</div>
+    <div class="info-line">Poids : {{ p.poids }} kg</div>
+    <div class="info-line">Niveau : {{ p.niveau }}</div>
+    <div class="info-line">Langues : {{ p.langues }}</div>
+  </div>
+
+  <div class="info-block">
+    <h2>Caractéristiques</h2>
+    <div class="info-line">FORCE : {{ p.force }}</div>
+    <div class="info-line">DEXTERITÉ : {{ p.dexterite }}</div>
+    <div class="info-line">CONSTITUTION : {{ p.constitution }}</div>
+    <div class="info-line">INTELLIGENCE : {{ p.intelligence }}</div>
+    <div class="info-line">SAGESSE : {{ p.sagesse }}</div>
+    <div class="info-line">CHARISME : {{ p.charisme }}</div>
+  </div>
+
+  <div class="info-block">
+    <h2>XP / PV / Or</h2>
+    <div class="info-line">XP : {{ p.xp }}</div>
+    <div class="info-line">PV : {{ p.pv_actuels }}/{{ p.pv_max }}</div>
+    <div class="info-line">Or : {{ p.or_total }}</div>
+    <div class="info-line">Argent : {{ p.argent_total }}</div>
+    <div class="info-line">Platine : {{ p.platine_total }}</div>
+  </div>
+
+  <div class="info-block">
+    <h2>Inventaire</h2>
+    {% for i in items %}
+      <div class="info-line">{{ i.name }} : {{ i.description }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="info-block">
+    <h2>Histoire</h2>
+    <div class="info-line">{{ p.histoire }}</div>
+  </div>
+
+  <div class="info-block">
+    <h2>Bonus</h2>
+    <div class="info-line">{{ p.bonus }}</div>
+  </div>
+
+  <div class="info-block">
+    <h2>Talents</h2>
+    <div class="info-line">{{ p.talents }}</div>
+  </div>
+</body>
+</html>

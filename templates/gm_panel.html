@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head><title>GM Panel</title><link rel="stylesheet" href="/static/style.css">
+</head>
+  <script src="/static/gm.js"></script>
+<body>
+  <h1>Interface Game Master</h1>
+  <a href="/logout">Déconnexion</a>
+
+  <h2>Joueurs</h2>
+  <ul>
+    {% for p in players %}
+      <li>{{ p.name }} (XP: {{ p.xp }})</li>
+      <a href="/edit_player/{{ p.id }}">✏️ Éditer</a>
+    {% endfor %}
+  </ul>
+
+  <h2>Créer un objet</h2>
+  <form id="itemForm">
+    Nom : <input name="name"><br>
+    Description : <input name="description"><br>
+    Valeur en or : <input name="value_or" type="number"><br>
+    Effet :
+    <select name="effect_type">
+      <option value="none">Aucun</option>
+      <option value="bonus">Bonus</option>
+    </select>
+    <select name="effect_stat">
+      <option value="force">Force</option>
+      <option value="dexterite">Dextérité</option>
+      <option value="constitution">Constitution</option>
+      <option value="intelligence">Intelligence</option>
+      <option value="sagesse">Sagesse</option>
+      <option value="charisme">Charisme</option>
+    </select>
+    +<input name="effect_value" type="number"><br>
+    Mettre dans boutique : <input type="checkbox" name="in_shop" checked><br>
+    <button type="submit">Créer</button>
+  </form>
+
+  <h2>Boutique</h2>
+  <button onclick="toggleShop()">Afficher/Cacher la boutique</button>
+  <ul id="itemList">
+    {% for i in items %}
+      <li>{{ i.name }} - {{ i.value_or }} PO ({{ i.description }})</li>
+    {% endfor %}
+  </ul>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    socket.on("items_updated", () => location.reload());
+
+    document.getElementById("itemForm").onsubmit = async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      data.value_or = parseInt(data.value_or);
+      data.effect_value = parseInt(data.effect_value);
+      data.in_shop = data.in_shop === "on";
+      const res = await fetch("/create_item", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) alert("Objet créé !");
+    };
+
+    function toggleShop() {
+      fetch("/toggle_shop");
+    }
+  </script>
+</body>
+</html>

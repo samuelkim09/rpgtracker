@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Connexion</title><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h2>Connexion au JDR</h2>
+  <form method="post">
+    Nom : <input name="name" required><br>
+    <label style="display: inline-flex; align-items: center; white-space: nowrap; flex-direction: row-reverse; gap: 10px;">
+      <input type="checkbox" name="is_gm" 
+             onchange="document.getElementById('pw').style.display = this.checked ? 'block' : 'none'">
+      <span>Je suis le Game Master</span>
+    </label><br>
+    <div id="pw" style="display:none;">Mot de passe : <input type="password" name="password"></div>
+    <button type="submit">Entrer</button>
+  </form>
+</body>
+</html>

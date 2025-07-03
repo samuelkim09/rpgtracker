@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Éditer un joueur</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Éditer {{ p.name }}</h1>
+    <form method="POST">
+      <div class="section">
+        <h2>Identité</h2>
+        <label>Nom <input name="name" value="{{ p.name }}"></label>
+        <label>Race <input name="race" value="{{ p.race }}"></label>
+        <label>Âge <input name="age" type="number" value="{{ p.age }}"></label>
+        <label>Poids <input name="poids" type="number" value="{{ p.poids }}"></label>
+        <label>Niveau <input name="niveau" type="number" value="{{ p.niveau }}"></label>
+        <label>Langues <input name="langues" value="{{ p.langues }}"></label>
+      </div>
+
+      <div class="section">
+        <h2>Caractéristiques</h2>
+        <label>FOR <input name="force" type="number" value="{{ p.force }}"></label>
+        <label>DEX <input name="dexterite" type="number" value="{{ p.dexterite }}"></label>
+        <label>CON <input name="constitution" type="number" value="{{ p.constitution }}"></label>
+        <label>INT <input name="intelligence" type="number" value="{{ p.intelligence }}"></label>
+        <label>SAG <input name="sagesse" type="number" value="{{ p.sagesse }}"></label>
+        <label>CHA <input name="charisme" type="number" value="{{ p.charisme }}"></label>
+      </div>
+
+      <div class="section">
+        <h2>Points</h2>
+        <label>XP <input name="xp" type="number" value="{{ p.xp }}"></label>
+        <label>PV actuels <input name="pv_actuels" type="number" value="{{ p.pv_actuels }}"></label>
+        <label>PV max <input name="pv_max" type="number" value="{{ p.pv_max }}"></label>
+        <label>Or (PO) <input name="or_total" type="number" value="{{ p.or_total }}"></label>
+        <label>Argent (PA) <input name="argent_total" type="number" value="{{ p.argent_total }}"></label>
+        <label>Platine (PP) <input name="platine_total" type="number" value="{{ p.platine_total }}"></label>
+      </div>
+
+      <div class="section">
+        <h2>Autres</h2>
+        <label>Histoire <textarea name="histoire">{{ p.histoire }}</textarea></label>
+        <label>Bonus <textarea name="bonus">{{ p.bonus }}</textarea></label>
+        <label>Talents <textarea name="talents">{{ p.talents }}</textarea></label>
+      </div>
+
+      <div class="section">
+        <h2>Inventaire</h2>
+        {% if items %}
+          <ul>
+            {% for i in items %}
+              <li>
+                {{ i.name }} ({{ i.description }})
+                <form method="POST" action="/delete_item" style="display:inline;">
+                  <input type="hidden" name="item_id" value="{{ i.id }}">
+                  <input type="hidden" name="player_id" value="{{ p.id }}">
+                  <button type="submit">🗑 Supprimer</button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>Aucun objet.</p>
+        {% endif %}
+      </div>
+
+      <button type="submit">Enregistrer</button>
+    </form>
+    <br>
+    <a href="/gm">← Retour au panneau GM</a>
+  </div>
+</body>
+</html>
