@@ -1,1 +1,90 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0 60px;
+}
 
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  margin-top: 1em;
+  color: #222;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 20px;
+}
+
+.section {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 5px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+button,
+input[type="submit"] {
+  background-color: #007acc;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: #005eaa;
+}
+
+.card {
+  background-color: #f9fbfd;
+  padding: 1em;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.flex > .card {
+  flex: 1 1 250px;
+}
